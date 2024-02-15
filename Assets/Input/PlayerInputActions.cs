@@ -64,7 +64,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Drag Movement"",
+                    ""name"": ""Screen Position"",
                     ""type"": ""Value"",
                     ""id"": ""dd806ec1-f80b-41aa-8a53-2b98842d70c1"",
                     ""expectedControlType"": ""Vector2"",
@@ -246,7 +246,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""Drag Movement"",
+                    ""action"": ""Screen Position"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -278,7 +278,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Camera_Roll = m_Camera.FindAction("Roll", throwIfNotFound: true);
         m_Camera_Zoom = m_Camera.FindAction("Zoom", throwIfNotFound: true);
         m_Camera_DragMovementEnabled = m_Camera.FindAction("Drag Movement Enabled", throwIfNotFound: true);
-        m_Camera_DragMovement = m_Camera.FindAction("Drag Movement", throwIfNotFound: true);
+        m_Camera_ScreenPosition = m_Camera.FindAction("Screen Position", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -344,7 +344,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Camera_Roll;
     private readonly InputAction m_Camera_Zoom;
     private readonly InputAction m_Camera_DragMovementEnabled;
-    private readonly InputAction m_Camera_DragMovement;
+    private readonly InputAction m_Camera_ScreenPosition;
     public struct CameraActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -353,7 +353,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Roll => m_Wrapper.m_Camera_Roll;
         public InputAction @Zoom => m_Wrapper.m_Camera_Zoom;
         public InputAction @DragMovementEnabled => m_Wrapper.m_Camera_DragMovementEnabled;
-        public InputAction @DragMovement => m_Wrapper.m_Camera_DragMovement;
+        public InputAction @ScreenPosition => m_Wrapper.m_Camera_ScreenPosition;
         public InputActionMap Get() { return m_Wrapper.m_Camera; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -375,9 +375,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @DragMovementEnabled.started += instance.OnDragMovementEnabled;
             @DragMovementEnabled.performed += instance.OnDragMovementEnabled;
             @DragMovementEnabled.canceled += instance.OnDragMovementEnabled;
-            @DragMovement.started += instance.OnDragMovement;
-            @DragMovement.performed += instance.OnDragMovement;
-            @DragMovement.canceled += instance.OnDragMovement;
+            @ScreenPosition.started += instance.OnScreenPosition;
+            @ScreenPosition.performed += instance.OnScreenPosition;
+            @ScreenPosition.canceled += instance.OnScreenPosition;
         }
 
         private void UnregisterCallbacks(ICameraActions instance)
@@ -394,9 +394,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @DragMovementEnabled.started -= instance.OnDragMovementEnabled;
             @DragMovementEnabled.performed -= instance.OnDragMovementEnabled;
             @DragMovementEnabled.canceled -= instance.OnDragMovementEnabled;
-            @DragMovement.started -= instance.OnDragMovement;
-            @DragMovement.performed -= instance.OnDragMovement;
-            @DragMovement.canceled -= instance.OnDragMovement;
+            @ScreenPosition.started -= instance.OnScreenPosition;
+            @ScreenPosition.performed -= instance.OnScreenPosition;
+            @ScreenPosition.canceled -= instance.OnScreenPosition;
         }
 
         public void RemoveCallbacks(ICameraActions instance)
@@ -429,6 +429,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnRoll(InputAction.CallbackContext context);
         void OnZoom(InputAction.CallbackContext context);
         void OnDragMovementEnabled(InputAction.CallbackContext context);
-        void OnDragMovement(InputAction.CallbackContext context);
+        void OnScreenPosition(InputAction.CallbackContext context);
     }
 }
