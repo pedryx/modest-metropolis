@@ -1,3 +1,7 @@
+using System.Drawing;
+
+using Unity.VisualScripting;
+
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -125,13 +129,29 @@ public class CameraController : MonoBehaviour
     }
 
     /// <summary>
+    /// Restrict camera's movement, so it is clamped into borders of terrain's plane.
+    /// </summary>
+    private void RestrictMovement()
+    {
+        float halfWidth = planeBaseSize * TerrainTransform.localScale.x / 2.0f;
+        float halfHeight = planeBaseSize * TerrainTransform.localScale.z / 2.0f;
+
+        transform.localPosition = new Vector3()
+        {
+            x = Mathf.Clamp(transform.localPosition.x, -halfWidth, halfWidth),
+            y = transform.localPosition.y,
+            z = Mathf.Clamp(transform.localPosition.z, -halfHeight, halfHeight),
+        };
+    }
+
+    /// <summary>
     /// Get world position of mouse. If raycast fails, then null is returned.
     /// </summary>
     /// <returns>On succesfull raycast, world position of the mouse, otherwise null.</returns>
-    private Vector3? RaycastMousePosition()
+    public Vector3? RaycastMousePosition()
     {
         Plane plane = new(Vector3.up, Vector3.zero);
-        Ray ray = Camera.main.ScreenPointToRay(playerInputActions.Camera.DragMovement.ReadValue<Vector2>());
+        Ray ray = Camera.main.ScreenPointToRay(playerInputActions.Camera.ScreenPosition.ReadValue<Vector2>());
 
         if (plane.Raycast(ray, out float enter))
         {
@@ -142,18 +162,13 @@ public class CameraController : MonoBehaviour
     }
 
     /// <summary>
-    /// Restrict camera's movement, so it is clamped into borders of terrain's plane.
+    /// Determine if specified point is in map boundary.
     /// </summary>
-    private void RestrictMovement()
+    public bool IsInBoundary(Vector3 point)
     {
-        float halfWidth = planeBaseSize * TerrainTransform.localScale.x / 2.0f;
-        float halfHeight = planeBaseSize * TerrainTransform.localScale.y / 2.0f;
+        float width = planeBaseSize * TerrainTransform.localScale.x;
+        float height = planeBaseSize * TerrainTransform.localScale.z;
 
-        transform.localPosition = new Vector3()
-        {
-            x = Mathf.Clamp(transform.localPosition.x, -halfWidth, halfWidth),
-            y = transform.localPosition.y,
-            z = Mathf.Clamp(transform.localPosition.z, -halfHeight, halfHeight),
-        };
+        return new RectangleF(-width / 2.0f, -height / 2.0f, width, height).Contains(point.x, point.z);
     }
 }
