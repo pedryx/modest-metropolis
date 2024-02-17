@@ -251,6 +251,34 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Build"",
+            ""id"": ""eb48ea41-305a-4ef1-893a-d4b6dd8fc5ab"",
+            ""actions"": [
+                {
+                    ""name"": ""Place Building"",
+                    ""type"": ""Button"",
+                    ""id"": ""f9a9ef32-6137-4163-9538-044eab8f64c6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""7a5c687e-c1ca-4835-a7df-09d48c0426e8"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Place Building"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -279,6 +307,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Camera_Zoom = m_Camera.FindAction("Zoom", throwIfNotFound: true);
         m_Camera_DragMovementEnabled = m_Camera.FindAction("Drag Movement Enabled", throwIfNotFound: true);
         m_Camera_ScreenPosition = m_Camera.FindAction("Screen Position", throwIfNotFound: true);
+        // Build
+        m_Build = asset.FindActionMap("Build", throwIfNotFound: true);
+        m_Build_PlaceBuilding = m_Build.FindAction("Place Building", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -414,6 +445,52 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         }
     }
     public CameraActions @Camera => new CameraActions(this);
+
+    // Build
+    private readonly InputActionMap m_Build;
+    private List<IBuildActions> m_BuildActionsCallbackInterfaces = new List<IBuildActions>();
+    private readonly InputAction m_Build_PlaceBuilding;
+    public struct BuildActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public BuildActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @PlaceBuilding => m_Wrapper.m_Build_PlaceBuilding;
+        public InputActionMap Get() { return m_Wrapper.m_Build; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(BuildActions set) { return set.Get(); }
+        public void AddCallbacks(IBuildActions instance)
+        {
+            if (instance == null || m_Wrapper.m_BuildActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_BuildActionsCallbackInterfaces.Add(instance);
+            @PlaceBuilding.started += instance.OnPlaceBuilding;
+            @PlaceBuilding.performed += instance.OnPlaceBuilding;
+            @PlaceBuilding.canceled += instance.OnPlaceBuilding;
+        }
+
+        private void UnregisterCallbacks(IBuildActions instance)
+        {
+            @PlaceBuilding.started -= instance.OnPlaceBuilding;
+            @PlaceBuilding.performed -= instance.OnPlaceBuilding;
+            @PlaceBuilding.canceled -= instance.OnPlaceBuilding;
+        }
+
+        public void RemoveCallbacks(IBuildActions instance)
+        {
+            if (m_Wrapper.m_BuildActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IBuildActions instance)
+        {
+            foreach (var item in m_Wrapper.m_BuildActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_BuildActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public BuildActions @Build => new BuildActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -430,5 +507,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnZoom(InputAction.CallbackContext context);
         void OnDragMovementEnabled(InputAction.CallbackContext context);
         void OnScreenPosition(InputAction.CallbackContext context);
+    }
+    public interface IBuildActions
+    {
+        void OnPlaceBuilding(InputAction.CallbackContext context);
     }
 }

@@ -229,6 +229,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Build",
+            "id": "eb48ea41-305a-4ef1-893a-d4b6dd8fc5ab",
+            "actions": [
+                {
+                    "name": "Place Building",
+                    "type": "Button",
+                    "id": "f9a9ef32-6137-4163-9538-044eab8f64c6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "7a5c687e-c1ca-4835-a7df-09d48c0426e8",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "Place Building",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
