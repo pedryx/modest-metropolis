@@ -1,4 +1,7 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Resources;
 
 using TMPro;
 
@@ -6,6 +9,10 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+    private const float labelUpdateWaitTime = 0.5f;
+
+    private readonly List<GameObject> labels = new();
+
     /// <summary>
     /// Height of labels in resource panel.
     /// </summary>
@@ -59,10 +66,12 @@ public class UIManager : MonoBehaviour
     [Tooltip("Prefab of building button.")]
     public GameObject BuildingButtonPrefab { get; private set; }
 
-    private void Awake()
+    private void Start()
     {
         CreateResourcePanel();
         CreateBuildingButtonsPanel();
+
+        StartCoroutine(DoLabelUpdateLoop());
     }
 
     private void CreateResourcePanel()
@@ -83,6 +92,7 @@ public class UIManager : MonoBehaviour
             GameObject quantityLabel = Instantiate(ResourceQuantityLabelPrefab, rectTransform);
             quantityLabel.GetComponent<RectTransform>().localPosition = new Vector3(5.0f, i * -resourceItemHeight, 0.0f);
             quantityLabel.GetComponent<TextMeshProUGUI>().text = resourceManager.Resources.Quantities[i].ToString();
+            labels.Add(quantityLabel);
         }
     }
 
@@ -90,7 +100,7 @@ public class UIManager : MonoBehaviour
     {
         var buildingTypes = BuildingScriptableObject.Instances;
         RectTransform rectTransform = BuildingButtonsPanel.GetComponent<RectTransform>();
-
+        
         Vector2 size = rectTransform.sizeDelta;
         size.x = (buttonItemWidth + 10.0f) * buildingTypes.Count;
         rectTransform.sizeDelta = size;
@@ -102,6 +112,19 @@ public class UIManager : MonoBehaviour
             button.GetComponentInChildren<TMP_Text>().text = buildingTypes[i].Name;
             button.GetComponent<BuildingButtonController>().BuildingType = buildingTypes[i];
             button.GetComponent<BuildingButtonController>().GridController = gridController;
+        }
+    }
+
+    private IEnumerator DoLabelUpdateLoop()
+    {
+        while (true)
+        {
+            for (int i = 0; i < resourceManager.Resources.Quantities.Length; i++)
+            {
+                labels[i].GetComponent<TextMeshProUGUI>().text = resourceManager.Resources.Quantities[i].ToString();
+            }
+
+            yield return new WaitForSeconds(labelUpdateWaitTime);
         }
     }
 }

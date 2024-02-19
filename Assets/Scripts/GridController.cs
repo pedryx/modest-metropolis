@@ -12,6 +12,9 @@ public class GridController : MonoBehaviour
     [Tooltip("Controller of main camera.")]
     private CameraController cameraController;
 
+    [SerializeField]
+    private ResourceManager resourceManager;
+
     /// <summary>
     /// Game object used to mark selected cell.
     /// </summary>
@@ -66,6 +69,7 @@ public class GridController : MonoBehaviour
                     BuildingManager.transform
                 );
                 building.GetComponent<BuildingController>().Type = SelectedBuilding;
+                building.GetComponent<BuildingController>().ResourceManager = resourceManager;
                 building.GetComponentInChildren<MeshRenderer>().material.color = SelectedBuilding.Color;
             }
         }

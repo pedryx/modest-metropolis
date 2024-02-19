@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 
 /// <summary>
 /// Represent a collection of resources.
@@ -15,5 +16,15 @@ public class ResourceCollection
     public ResourceCollection()
     {
         Quantities = new int[ResourceScriptableObject.Instances.Count];
+    }
+
+    /// <summary>
+    /// Adds specified quantity to resource of specified id.
+    /// </summary>
+    public void Add(int id, int quantity)
+    {
+        Debug.Assert(quantity > 0);
+
+        Quantities[id] += quantity;
     }
 }
