@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class BuildingController : MonoBehaviour
 {
-    public ResourceManager ResourceManager { get; set; }
-
     /// <summary>
     /// Building SO which represent the type of building.
     /// </summary>
@@ -23,7 +21,7 @@ public class BuildingController : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(Type.ProductionTime);
-            ResourceManager.Resources.Add(Type.ResourceType.ID, Type.ProductionAmount);
+            ResourceManager.Instance.Resources.Add(Type.ResourceType.ID, Type.ProductionAmount);
         }
     }
 }

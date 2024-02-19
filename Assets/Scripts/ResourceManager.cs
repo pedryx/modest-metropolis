@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ResourceManager : MonoBehaviour
+public class ResourceManager : Singleton<ResourceManager>
 {
     /// <summary>
     /// Resources owned by player.

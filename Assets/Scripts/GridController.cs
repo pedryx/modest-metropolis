@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GridController : MonoBehaviour
+public class GridController : Singleton<GridController>
 {
     private PlayerInputActions playerInputActions;
     private Grid grid;
@@ -11,9 +11,6 @@ public class GridController : MonoBehaviour
     [SerializeField]
     [Tooltip("Controller of main camera.")]
     private CameraController cameraController;
-
-    [SerializeField]
-    private ResourceManager resourceManager;
 
     /// <summary>
     /// Game object used to mark selected cell.
@@ -69,7 +66,6 @@ public class GridController : MonoBehaviour
                     BuildingManager.transform
                 );
                 building.GetComponent<BuildingController>().Type = SelectedBuilding;
-                building.GetComponent<BuildingController>().ResourceManager = resourceManager;
                 building.GetComponentInChildren<MeshRenderer>().material.color = SelectedBuilding.Color;
             }
         }

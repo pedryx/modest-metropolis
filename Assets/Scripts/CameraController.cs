@@ -1,7 +1,5 @@
 using System.Drawing;
 
-using Unity.VisualScripting;
-
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -57,8 +55,6 @@ public class CameraController : MonoBehaviour
     [field: SerializeField]
     [Tooltip("Maximum allowed zoom of the camera. (More zoom ~ more zoomed out.)")]
     public float MaxZoom { get; private set; } = 100.0f;
-
-    public float Mag = 1.0f;
 
     private void Awake()
     {

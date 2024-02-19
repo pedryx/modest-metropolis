@@ -11,7 +11,7 @@ public abstract class GlobalScritableObject<TChild> : ScriptableObject
     /// <summary>
     /// Contains all instantiated resource scriptable objects.
     /// </summary>
-    private static List<TChild> instances = new();
+    private static readonly List<TChild> instances = new();
 
     /// <summary>
     /// Contains all instantiated resource scriptable objects.
