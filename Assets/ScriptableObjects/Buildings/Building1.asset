@@ -14,3 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Color: {r: 1, g: 0, b: 0, a: 0}
   <Name>k__BackingField: Building1
+  <ResourceType>k__BackingField: {fileID: 11400000, guid: ea284bd65334016409cebe3cd85eab9c,
+    type: 2}
+  <ProductionTime>k__BackingField: 2
+  <ProductionAmount>k__BackingField: 2
+  <Cost>k__BackingField:
+    Quantities: 0500000000000000

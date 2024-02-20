@@ -35,4 +35,11 @@ public class BuildingScriptableObject : GlobalScritableObject<BuildingScriptable
     [field: SerializeField]
     [Tooltip("How many resources will be produced.")]
     public int ProductionAmount { get; private set; }
+
+    /// <summary>
+    /// Cost of the building.
+    /// </summary>
+    [field: SerializeField]
+    [Tooltip("Cost of the building.")]
+    public ResourceCollection Cost { get; private set; }
 }

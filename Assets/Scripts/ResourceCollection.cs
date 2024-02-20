@@ -27,4 +27,36 @@ public class ResourceCollection
 
         Quantities[id] += quantity;
     }
+
+    /// <summary>
+    /// Remove from this collection specified amounts of resources.
+    /// </summary>
+    /// <param name="resources">The specified amounts of resources to remove.</param>
+    public void Remove(ResourceCollection resources)
+    {
+        Debug.Assert(Contains(resources));
+
+        for (int i = 0; i < Quantities.Length; i++)
+        {
+            Quantities[i] -= resources.Quantities[i];
+        }
+    }
+
+    /// <summary>
+    /// Check if this collection contains the specified amounts of resources.
+    /// </summary>
+    /// <param name="resources">The specified amounts of resources.</param>
+    /// <returns>True if collection have at least specified amount of resources, otherwise false.</returns>
+    public bool Contains(ResourceCollection resources)
+    {
+        for (int i = 0; i < Quantities.Length; i++)
+        {
+            if (Quantities[i] < resources.Quantities[i])
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

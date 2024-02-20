@@ -402,7 +402,6 @@ MonoBehaviour:
   <ZoomSensitivity>k__BackingField: 0.05
   <MinZoom>k__BackingField: 10
   <MaxZoom>k__BackingField: 100
-  Mag: 1
 --- !u!4 &384872782
 Transform:
   m_ObjectHideFlags: 0
@@ -1050,8 +1049,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 662f986578905a94a80599a1bd68d650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceManager: {fileID: 1498803143}
-  gridController: {fileID: 1892224195}
   <ResourcePanel>k__BackingField: {fileID: 775841098}
   <ResourceNameLabelPrefab>k__BackingField: {fileID: 610935987121605119, guid: c2966e57c61eae54aa4430c0b6f60bd3,
     type: 3}
@@ -1090,7 +1087,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Resources>k__BackingField:
-    Quantities: 0400000002000000
+    Quantities: 0500000005000000
 --- !u!4 &1498803144
 Transform:
   m_ObjectHideFlags: 0
@@ -1141,8 +1138,7 @@ MonoBehaviour:
   <BuildingManager>k__BackingField: {fileID: 2145951920}
   <BuildingPrefab>k__BackingField: {fileID: 3051002763601755485, guid: 61e2ad6665a00da4abd73fb4a513716d,
     type: 3}
-  <SelectedBuilding>k__BackingField: {fileID: 11400000, guid: 812c1a7bdc50b794b9a878e7e4c5ac0a,
-    type: 2}
+  <SelectedBuilding>k__BackingField: {fileID: 0}
 --- !u!4 &1892224196
 Transform:
   m_ObjectHideFlags: 0
@@ -1182,7 +1178,7 @@ GameObject:
   - component: {fileID: 1964602099}
   - component: {fileID: 1964602098}
   m_Layer: 0
-  m_Name: ScriptableObjectsHolder
+  m_Name: OnjectsHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

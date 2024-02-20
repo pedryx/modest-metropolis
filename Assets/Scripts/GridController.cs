@@ -56,18 +56,22 @@ public class GridController : Singleton<GridController>
             CellMarker.SetActive(true);
             CellMarker.transform.position = grid.CellToWorld(grid.WorldToCell(position.Value)) + grid.cellSize / 2.0f;
 
-            if (playerInputActions.Build.PlaceBuilding.WasPressedThisFrame() && SelectedBuilding != null)
-            {
-                GameObject building = Instantiate
-                (
-                    BuildingPrefab, 
-                    CellMarker.transform.position, 
-                    Quaternion.identity, 
-                    BuildingManager.transform
-                );
-                building.GetComponent<BuildingController>().Type = SelectedBuilding;
-                building.GetComponentInChildren<MeshRenderer>().material.color = SelectedBuilding.Color;
-            }
+            if (!(playerInputActions.Build.PlaceBuilding.WasPressedThisFrame() && SelectedBuilding != null))
+                return;
+            if (!ResourceManager.Instance.Resources.Contains(SelectedBuilding.Cost))
+                return;
+
+            ResourceManager.Instance.Resources.Remove(SelectedBuilding.Cost);
+
+            GameObject building = Instantiate
+            (
+                BuildingPrefab, 
+                CellMarker.transform.position, 
+                Quaternion.identity, 
+                BuildingManager.transform
+            );
+            building.GetComponent<BuildingController>().Type = SelectedBuilding;
+            building.GetComponentInChildren<MeshRenderer>().material.color = SelectedBuilding.Color;
         }
         else
         {
