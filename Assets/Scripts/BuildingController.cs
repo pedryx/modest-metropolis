@@ -13,6 +13,9 @@ public class BuildingController : MonoBehaviour
 
     private void Start()
     {
+        GameObject building = Instantiate(Type.Model, Vector3.zero, Quaternion.identity, transform);
+        building.transform.localPosition = Vector3.zero;
+
         StartCoroutine(DoProductionLoop());
     }
 

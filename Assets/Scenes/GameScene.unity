@@ -1198,10 +1198,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resources:
   - {fileID: 11400000, guid: ea284bd65334016409cebe3cd85eab9c, type: 2}
-  - {fileID: 11400000, guid: ac552f9d37d65f34e9ad8e12557df2ea, type: 2}
+  - {fileID: 11400000, guid: a70820f72c276bb4bb7b2c9a28c3d134, type: 2}
   buildings:
   - {fileID: 11400000, guid: 812c1a7bdc50b794b9a878e7e4c5ac0a, type: 2}
-  - {fileID: 11400000, guid: 5108d6cde7ca1c447aa8c005d4253653, type: 2}
+  - {fileID: 11400000, guid: 7fd6a1c36d6b7e346bab9e8b8e5a9ae6, type: 2}
 --- !u!4 &1964602099
 Transform:
   m_ObjectHideFlags: 0

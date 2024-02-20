@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37b0c5cc237009d49a09f645d3e9f5d0, type: 3}
-  m_Name: Building1
+  m_Name: Mine
   m_EditorClassIdentifier: 
-  Color: {r: 1, g: 0, b: 0, a: 0}
   <Name>k__BackingField: Building1
-  <ResourceType>k__BackingField: {fileID: 11400000, guid: ea284bd65334016409cebe3cd85eab9c,
+  <ResourceType>k__BackingField: {fileID: 11400000, guid: a70820f72c276bb4bb7b2c9a28c3d134,
     type: 2}
-  <ProductionTime>k__BackingField: 2
-  <ProductionAmount>k__BackingField: 2
+  <ProductionTime>k__BackingField: 3
+  <ProductionAmount>k__BackingField: 1
   <Cost>k__BackingField:
-    Quantities: 0500000000000000
+    Quantities: 1400000000000000
+  <Model>k__BackingField: {fileID: 100000, guid: 00d9a8a215a5fb84ba980e3b6a842288,
+    type: 3}
