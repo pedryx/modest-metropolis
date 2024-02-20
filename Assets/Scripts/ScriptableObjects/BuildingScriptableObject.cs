@@ -6,8 +6,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Building", menuName = "ScriptableObjects/Building")]
 public class BuildingScriptableObject : GlobalScritableObject<BuildingScriptableObject>
 {
-    public Color Color = Color.white;
-
     /// <summary>
     /// Name of the building.
     /// </summary>
@@ -42,4 +40,11 @@ public class BuildingScriptableObject : GlobalScritableObject<BuildingScriptable
     [field: SerializeField]
     [Tooltip("Cost of the building.")]
     public ResourceCollection Cost { get; private set; }
+
+    /// <summary>
+    /// 3D model of the building.
+    /// </summary>
+    [field: SerializeField]
+    [Tooltip("3D model of the building.")]
+    public GameObject Model { get; private set; }
 }

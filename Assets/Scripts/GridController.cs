@@ -71,7 +71,6 @@ public class GridController : Singleton<GridController>
                 BuildingManager.transform
             );
             building.GetComponent<BuildingController>().Type = SelectedBuilding;
-            building.GetComponentInChildren<MeshRenderer>().material.color = SelectedBuilding.Color;
         }
         else
         {
